@@ -1,9 +1,14 @@
 import chess
 
-PROMPT = """You are playing chess. Reply with your move in UCI format (e.g. e2e4, or e7e8q for promotion) and nothing else.
+PROMPT = """You are playing chess.
 
 {side} to move.
-{board}"""
+{board}
+
+Answer with exactly 4 characters: letter, number, letter, number.
+The first square is where the piece is, the second is where it moves to.
+Example: e2e4
+Answer with nothing else."""
 
 
 def expand_fen(fen):
