@@ -2,7 +2,7 @@ import chess
 from datasets import load_dataset
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from utils import expand_fen
+from utils import build_prompt
 
 MODEL_NAME = "Qwen/Qwen2.5-0.5B-Instruct"
 DATASET_NAME = "Lichess/chess-puzzles"
@@ -20,7 +20,7 @@ def to_ids(row):
     moves = row["Moves"].split()
     board.push_uci(moves[0])  # modstanderens træk
 
-    prompt = tokenizer(expand_fen(board.fen()) + "\n")["input_ids"]
+    prompt = tokenizer(build_prompt(board, tokenizer))["input_ids"]
     target = tokenizer(moves[1] + tokenizer.eos_token)["input_ids"]
 
     return {"input_ids": prompt + target,
