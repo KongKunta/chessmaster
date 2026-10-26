@@ -19,3 +19,4 @@ def build_prompt(board: chess.Board, tokenizer) -> str:
     content = PROMPT.format(side=side, board=expand_fen(board.fen()))
     messages = [{"role": "user", "content": content}]
     return tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    
